@@ -1,3 +1,26 @@
-.login{
+.login_container{
     min-height: 100vh;
+
+    padding: 100px 10px;
+
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.login{
+    padding: 30px 15px;
+
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr 2fr;
+    gap: 10px;
+
+    background-color: var(--color-bg-2);
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.login .button_submit{
+    justify-self: flex-end;
+    align-self: flex-end;
 }

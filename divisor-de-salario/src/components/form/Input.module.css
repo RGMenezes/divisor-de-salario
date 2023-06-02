@@ -1,0 +1,24 @@
+.input_container{
+    width: 100%;
+
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+}
+
+.input_container label{
+    cursor: pointer;
+
+    font: normal 600 1em var(--font);
+    color: var(--color-1);
+}
+
+.input_container input{
+    padding: 5px 10px;
+
+    background-color: transparent;
+    font: normal normal .9em var(--font);
+    color: var(--color-1);
+    border: 1px solid var(--color-1);
+    border-radius: 0px;
+}

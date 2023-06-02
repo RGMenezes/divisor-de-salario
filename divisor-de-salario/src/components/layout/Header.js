@@ -6,6 +6,7 @@ import styles from "./Header.module.css";
 import logo from "../../assets/logo/logo.svg";
 
 import LinkButton from "./LinkButton";
+import LinkText from "./LinkText";
 
 function Header({type = "standard", setType, dark, setDark, setTheme}){
     
@@ -22,15 +23,15 @@ function Header({type = "standard", setType, dark, setDark, setTheme}){
         };
     }, [type, location.pathname, setType]);
     
-    const [themeButton, setThemeButton] = useState(25);
+    const [themeButton, setThemeButton] = useState(5);
 
     function changeTheme(){
         if(!dark){
-            setThemeButton(75);
+            setThemeButton(55);
             setTheme("dark");
             setDark(!dark);
         }else{
-            setThemeButton(25);
+            setThemeButton(5);
             setTheme("ligth");
             setDark(!dark);
         };
@@ -49,7 +50,7 @@ function Header({type = "standard", setType, dark, setDark, setTheme}){
                     className={styles.theme_buttom} 
                     viewBox="0 0 100 50"
                 >
-                    <circle r="20" cx={themeButton} cy="25" />
+                    <rect width={40} height={40} x={themeButton} y="5" />
                 </svg>
                 { type === "login" && (
                     <LinkButton to="/register" text="Inscrever-se" />
@@ -59,7 +60,7 @@ function Header({type = "standard", setType, dark, setDark, setTheme}){
                 )} 
                 { type === "standard" && (
                     <nav>
-
+                        <LinkText />
                     </nav>
                 )} 
             </div>

@@ -14,6 +14,10 @@
 
 }
 
+.header .logo{
+    width: 40px;
+}
+
 .header div{
     justify-self: flex-end;
     display: flex;
@@ -22,9 +26,15 @@
     align-items: center;
 }
 
-.header .logo{
-    width: 40px;
+.header nav{
+    width: 200px;
+    height: 100vh;
+
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
 }
+
 
 .theme_buttom{
     cursor: pointer;
@@ -32,8 +42,7 @@
     width: 40px;
     height: fit-content;
 
-    border: 2px solid var(--color-1);
-    border-radius: 100px;
+    border: 1px solid var(--color-1);
 }
 .theme_buttom:focus{
     outline: none;
@@ -42,7 +51,7 @@
     outline: 1px solid var(--color-main-2);
 }
 
-.theme_buttom circle{
+.theme_buttom rect{
     fill: var(--color-1);
 }
 
@@ -51,7 +60,7 @@
     .theme_buttom:hover{
         border-color: var(--color-main-2);
     }
-    .theme_buttom:hover circle{
+    .theme_buttom:hover rect{
         fill: var(--color-main-2);
     }
 }
@@ -62,7 +71,7 @@
 
     transition: all .1s ease;
 }
-.theme_buttom:active circle{
+.theme_buttom:active rect{
     fill: var(--color-main-1);
 
     transition: all .1s ease;
