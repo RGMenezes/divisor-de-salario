@@ -24,6 +24,17 @@
   --font: 'Montserrat', sans-serif;
 }
 
+::-webkit-scrollbar{
+  width: 0px;
+  height: 4px;
+
+  background-color: var(--color-bg-2);
+}
+::-webkit-scrollbar-thumb{
+  background-color: var(--color-1);
+  border: 1px solid var(--color-bg-2);
+}
+
 
 h1{
   font: normal 800 2em var(--font);
@@ -33,4 +44,12 @@ h1{
 p{
   font: normal normal 1em var(--font);
   color: var(--color-1);
+}
+
+
+@media screen and (min-width: 481px) {
+  ::-webkit-scrollbar{
+    width: 10px;
+    height: 10px;
+  }
 }

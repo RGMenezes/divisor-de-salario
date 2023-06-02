@@ -3,7 +3,7 @@
 
     padding: 15px 10px;
 
-    position: fixed;
+    position: sticky;
     top: 0px;
 
     display: grid;
@@ -11,6 +11,9 @@
     align-items: center;
     justify-items: left;
     gap: 10px;
+
+    background-color: var(--color-bg-1);
+    border-bottom: 1px solid var(--color-1);
 
 }
 
