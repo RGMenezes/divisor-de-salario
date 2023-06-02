@@ -3,6 +3,8 @@ import styles from "./Login.module.css";
 import Input from "../form/Input";
 import Submit from "../form/Submit";
 
+import LinkText from "../layout/LinkText";
+
 function Login(){
     return (
         <div className={styles.login_container}>
@@ -21,7 +23,8 @@ function Login(){
                     text="Senha"
                     placeholder="Digite sua senha."
                 />
-                <div className={styles.button_submit}>
+                <div className={styles.action_container}>
+                    <LinkText to="/register" text="Inscrever-se" />
                     <Submit text="Entrar" detach={true} />
                 </div>
             </form>

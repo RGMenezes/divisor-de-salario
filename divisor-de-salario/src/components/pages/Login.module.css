@@ -20,7 +20,11 @@
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.login .button_submit{
+.login .action_container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     justify-self: flex-end;
     align-self: flex-end;
 }
