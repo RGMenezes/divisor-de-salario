@@ -1,0 +1,17 @@
+.dark{
+  --color-bg-1: #1C1C1C;
+  --color-bg-2: #292929;
+  --color-1: #F5F5F5;
+  --color-2: #FFFFFF;
+
+  background-color: var(--color-bg-1);
+}
+
+.light{
+  --color-bg-1: #ffffff;
+  --color-bg-2: #f5f5f5;
+  --color-1: #333333;
+  --color-2: #000000;
+
+  background-color: var(--color-bg-1);
+}
