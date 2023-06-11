@@ -18,13 +18,13 @@ function App() {
   const [darkMode, setdarkMode] = useState(false);
   const [userRouter, setUserRouter] = useState("login");
 
-  useEffect(() => {
-    api.get('/').then((res) => {
-      console.log(res);
+  function teste(){
+    api.post('/posts', {message: "A mensagem foi enviada do front para o back"}).then((res) => {
+      console.log(res.data);
     }).catch((err) => {
       console.log("Houve um erro "+err);
     });
-  }, []);
+  };
 
 
   return (
@@ -37,6 +37,8 @@ function App() {
           setDark={setdarkMode} 
           setTheme={setThemeMode} 
         />
+
+        <button onClick={teste} > teste</button>
 
         <Routes>
           <Route path="/" element={<Login />} />
