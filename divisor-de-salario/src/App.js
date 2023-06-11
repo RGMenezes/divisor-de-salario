@@ -1,5 +1,7 @@
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import api from "./api/db"
 
 import styles from "./App.module.css"
 
@@ -15,6 +17,14 @@ function App() {
   const [themeMode, setThemeMode] = useState("light");
   const [darkMode, setdarkMode] = useState(false);
   const [userRouter, setUserRouter] = useState("login");
+
+  useEffect(() => {
+    api.get('/').then((res) => {
+      console.log(res);
+    }).catch((err) => {
+      console.log("Houve um erro "+err);
+    });
+  }, []);
 
 
   return (
