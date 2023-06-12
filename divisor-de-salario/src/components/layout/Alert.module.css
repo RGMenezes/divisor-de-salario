@@ -1,0 +1,33 @@
+.boxAlert{
+    padding: 30px 20px;
+    width: 300px;
+
+    position: fixed;
+    top: 0px;
+    left: 50%;
+
+    background-color: var(--color-bg-2);
+    font: normal 600 .9em var(--font);
+    color: var(--color-2);
+    border: 1px solid var(--color-1);
+    border-top: none;
+    
+    transform: translate(-50%, -100%);
+    transition: all .3s ease;
+}
+
+.error{
+    background-color: #ffcdd2;
+    color: #b71c1c;
+    border-color: #f44336;
+}
+
+.success{
+    background-color: #c8e6c9;
+    color: #2e7d32;
+    border-color: #4caf50;
+}
+
+.fade{
+    transform: translate(-50%, 0px);
+}

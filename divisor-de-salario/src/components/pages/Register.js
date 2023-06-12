@@ -6,19 +6,30 @@ import styles from "./Register.module.css";
 import Input from "../form/Input";
 import Button from "../form/Button";
 import LinkText from "../layout/LinkText";
+import Alert from "../layout/Alert";
 
 function Register(){
 
     const [user, setUser] = useState({});
+    const [alert, setAlert] = useState(false);
+    const [messageAlert, setMessageAlert] = useState("");
+    const [typeMessageAlert, setTypeMessageAlert] = useState("error");
 
     function submit(e){
         e.preventDefault();
 
-        api.post("/register", {user: user}).then((res) => {
-            console.log(res.data)
-        }).catch((err) => {
-            //Fazer o alert do site
-        });
+        if(user.password === user.passwordConfirm){
+            api.post("/register", {user: user}).then((res) => {
+            
+            }).catch((err) => {
+                //Fazer o alert do site
+            });
+        }else{
+            setAlert(true);
+            setMessageAlert("As senhas não são iguais, tente novamente!");
+            setTypeMessageAlert("error");
+        };
+
     };
 
     function collectData(e){
@@ -27,6 +38,8 @@ function Register(){
 
     return (
         <div className={styles.register_container}>
+            {alert && <Alert type={typeMessageAlert} text={messageAlert} timeActive={5}/>}
+
             <form onSubmit={submit} autoComplete="on" className={styles.register}>
                 <h1>Registrar</h1>
                 <p>Registre-se para ter acesso aos nossos serviços.</p>
@@ -53,6 +66,7 @@ function Register(){
                     handleOnChange={collectData}
                     placeholder="Digite sua senha."
                     required={true}
+                    minLength="8"
                 />
                 <Input
                     id="passwordConfirm"
@@ -61,6 +75,7 @@ function Register(){
                     handleOnChange={collectData}
                     placeholder="Digite sua senha novamente."
                     required={true}
+                    minLength="8"
                 />
                 <div className={styles.action_container}>
                     <LinkText to="/" text="Login" />
