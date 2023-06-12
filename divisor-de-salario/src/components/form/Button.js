@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import styles from "./Submit.module.css";
+import styles from "./Button.module.css";
 
-function Submit({text, detach = false}){
+function Button({text,type , detach = false}){
 
     const [onDetach, setOnDetach] = useState("")
 
@@ -10,8 +10,8 @@ function Submit({text, detach = false}){
     }, [detach])
 
     return(
-        <input type="submit" className={`${styles.button} ${styles[onDetach]}`} value={text} />
+        <button type={type} className={`${styles.button} ${styles[onDetach]}`}>{text}</button>
     );
 };
 
-export default Submit;
+export default Button;

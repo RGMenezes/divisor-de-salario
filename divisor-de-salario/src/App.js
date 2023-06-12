@@ -1,5 +1,5 @@
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import api from "./api/db"
 
@@ -19,7 +19,7 @@ function App() {
   const [userRouter, setUserRouter] = useState("login");
 
   function teste(){
-    api.post('/posts', {message: "A mensagem foi enviada do front para o back"}).then((res) => {
+    api.post('/', {message: "A mensagem foi enviada do front para o back"}).then((res) => {
       console.log(res.data);
     }).catch((err) => {
       console.log("Houve um erro "+err);
@@ -37,8 +37,6 @@ function App() {
           setDark={setdarkMode} 
           setTheme={setThemeMode} 
         />
-
-        <button onClick={teste} > teste</button>
 
         <Routes>
           <Route path="/" element={<Login />} />
