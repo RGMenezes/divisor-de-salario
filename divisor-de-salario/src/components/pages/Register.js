@@ -11,7 +11,7 @@ import Alert from "../layout/Alert";
 function Register(){
 
     const [user, setUser] = useState({});
-    const [alert, setAlert] = useState(false);
+    const [alert, setAlert] = useState(0);
     const [messageAlert, setMessageAlert] = useState("");
     const [typeMessageAlert, setTypeMessageAlert] = useState("error");
 
@@ -25,7 +25,7 @@ function Register(){
                 //Fazer o alert do site
             });
         }else{
-            setAlert(true);
+            setAlert(10);
             setMessageAlert("As senhas não são iguais, tente novamente!");
             setTypeMessageAlert("error");
         };
@@ -38,7 +38,7 @@ function Register(){
 
     return (
         <div className={styles.register_container}>
-            {alert && <Alert type={typeMessageAlert} text={messageAlert} timeActive={5}/>}
+            <Alert type={typeMessageAlert} text={messageAlert} timeActive={alert}/>
 
             <form onSubmit={submit} autoComplete="on" className={styles.register}>
                 <h1>Registrar</h1>
