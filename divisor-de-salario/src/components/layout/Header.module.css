@@ -30,12 +30,9 @@
 }
 
 .header nav{
-    width: 200px;
-    height: 100vh;
-
-    position: fixed;
-    bottom: 0px;
-    left: 0px;
+    display: flex;
+    flex-flow: row nowrap;
+    gap: 10px;
 }
 
 

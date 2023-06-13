@@ -62,7 +62,8 @@ function Header({type = "standard", setType, dark, setDark, setTheme}){
                 )} 
                 { type === "standard" && (
                     <nav>
-                        <LinkText />
+                        <LinkText to="/divisions" text="Divisões" />
+                        <LinkText to="/newdivision" text="Nova divisão" />
                     </nav>
                 )} 
             </div>

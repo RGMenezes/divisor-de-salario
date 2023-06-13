@@ -6,6 +6,8 @@ import styles from "./App.module.css"
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
 import Home from "./components/pages/Home";
+import NewDivision from "./components/pages/NewDivision";
+import Divisions from "./components/pages/Divisions";
 
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
@@ -41,6 +43,8 @@ function App() {
           <Route path="/" element={<Login onAlert={alertActive} />} />
           <Route path="/register" element={<Register onAlert={alertActive} />} />
           <Route path="/home" element={<Home />} />
+          <Route path="/divisions" element={<NewDivision />} />
+          <Route path="/newdivision" element={<Divisions />} />
         </Routes>
         <Footer />
       </div>
