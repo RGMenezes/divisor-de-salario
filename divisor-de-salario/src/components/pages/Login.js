@@ -10,7 +10,7 @@ import Button from "../form/Button";
 import LinkText from "../layout/LinkText";
 
 function Login({onAlert}){
-    
+
     const navigate = useNavigate();
     const [user, setUser] = useState({});
 
@@ -18,8 +18,12 @@ function Login({onAlert}){
         e.preventDefault();
 
         api.post("/login", user).then((res) => {
-            onAlert(res.data.type, res.data.value.message);
-            navigate(res.data.redirect);
+            if(res.data.type === "success"){
+                navigate(res.data.redirect);
+            }else{
+                onAlert(res.data.type, res.data.value.message);
+                navigate(res.data.redirect);
+            };
         }).catch((err) => {
             console.log(`Erro: ${err}`);
         });
