@@ -9,6 +9,7 @@ import Home from "./components/pages/Home";
 
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
+import Alert from "./components/layout/Alert";
 
 function App() {
 
@@ -16,10 +17,18 @@ function App() {
   const [darkMode, setdarkMode] = useState(false);
   const [userRouter, setUserRouter] = useState("login");
 
+  const [alert, setAlert] = useState(false);
+
+  function reRenderAlert(){
+    setAlert(true);
+    setTimeout(() => setAlert(false), 50);
+  };
 
   return (
     <Router>
-      <div className={`${styles[themeMode]}`}>
+      <div onSubmit={reRenderAlert} className={`${styles[themeMode]}`}>
+        <Alert reRender={alert} />
+
         <Header 
           type={userRouter} 
           setType={setUserRouter}

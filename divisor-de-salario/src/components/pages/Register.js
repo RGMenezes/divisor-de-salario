@@ -6,28 +6,44 @@ import styles from "./Register.module.css";
 import Input from "../form/Input";
 import Button from "../form/Button";
 import LinkText from "../layout/LinkText";
-import Alert from "../layout/Alert";
 
 function Register(){
-
     const [user, setUser] = useState({});
-    const [alert, setAlert] = useState(0);
-    const [messageAlert, setMessageAlert] = useState("");
-    const [typeMessageAlert, setTypeMessageAlert] = useState("error");
 
     function submit(e){
         e.preventDefault();
 
         if(user.password === user.passwordConfirm){
             api.post("/register", {user: user}).then((res) => {
-            
+                console.log(res.data)
+                api.post("/alert", {message: res.data}).then().catch((err) => {
+                    console.log("Erro: "+err);
+                });
             }).catch((err) => {
-                //Fazer o alert do site
+                let message = {
+                    type: "error", 
+                    value: {
+                        error: err, 
+                        message: "Não foi possível acessar o servidor para concluir o cadastro, tente novamente!"
+                    },
+                    redirect: "/"
+                };
+                api.post("/alert", {message: message}).then().catch((err) => {
+                    console.log("Erro: "+err);
+                });
             });
         }else{
-            setAlert(10);
-            setMessageAlert("As senhas não são iguais, tente novamente!");
-            setTypeMessageAlert("error");
+            let message = {
+                type: "error", 
+                value: {
+                    error: "Senhas diferentes", 
+                    message: "As senhas não são iguais, tente novamente!"
+                },
+                redirect: "/register"
+            };
+            api.post("/alert", {message: message}).then().catch((err) => {
+                console.log("Erro: "+err);
+            });
         };
 
     };
@@ -38,7 +54,6 @@ function Register(){
 
     return (
         <div className={styles.register_container}>
-            <Alert type={typeMessageAlert} text={messageAlert} timeActive={alert}/>
 
             <form onSubmit={submit} autoComplete="on" className={styles.register}>
                 <h1>Registrar</h1>
