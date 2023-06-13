@@ -8,8 +8,10 @@
     transition: all 0s ease;
 }
 
-.svg:hover{
-    fill: var(--color-main-2);
+@media screen and (min-width: 481px) {
+    .svg:hover{
+        fill: var(--color-main-2);
+    }
 }
 
 .svg:active{
