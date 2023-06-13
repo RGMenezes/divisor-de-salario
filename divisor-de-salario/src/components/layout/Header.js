@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 
 import styles from "./Header.module.css";
 
-import logo from "../../assets/logo/logo.svg";
+import Logo from "../assets/Logo";
 
 import LinkButton from "./LinkButton";
 import LinkText from "./LinkText";
@@ -41,8 +41,10 @@ function Header({type = "standard", setType, dark, setDark, setTheme}){
 
     return(
         <header className={styles.header} >
-            <img className={styles.logo} src={logo} alt="logo do site" />
-            <div>
+            <div className={styles.logo}>
+                <Logo />
+            </div>
+            <div className={styles.action_container}>
                 <svg 
                     onClick={changeTheme} 
                     onKeyDown={keyDown} 
