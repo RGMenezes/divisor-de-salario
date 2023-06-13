@@ -36,7 +36,8 @@ function App() {
           setType={setUserRouter}
           dark={darkMode} 
           setDark={setdarkMode} 
-          setTheme={setThemeMode} 
+          setTheme={setThemeMode}
+          onAlert={alertActive} 
         />
 
         <Routes>

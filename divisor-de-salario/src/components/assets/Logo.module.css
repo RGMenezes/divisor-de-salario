@@ -1,5 +1,22 @@
 .svg{
     width: 100%;
 
+    cursor: pointer;
     fill: var(--color-2);
+    outline: none;
+
+    transition: all 0s ease;
+}
+
+.svg:hover{
+    fill: var(--color-main-2);
+}
+
+.svg:active{
+    outline: none;
+    fill: var(--color-main-1);
+}
+
+.svg:focus-visible{
+    outline: 1px solid var(--color-main-2);
 }

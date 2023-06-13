@@ -1,8 +1,9 @@
 import styles from "./Logo.module.css";
 
-function Logo(){
+function Logo({handleOnClick, onKeyDown}){
     return(
-        <svg className={styles.svg} version="1.0" xmlns="http://www.w3.org/2000/svg"
+        <svg tabIndex={0} className={styles.svg} onClick={handleOnClick} onKeyDown={onKeyDown}
+        version="1.0" xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 500.000000 500.000000"
         preserveAspectRatio="xMidYMid meet">
 

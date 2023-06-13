@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import api from "../../api/db";
 
 import styles from "./Header.module.css";
 
@@ -8,23 +9,33 @@ import Logo from "../assets/Logo";
 import LinkButton from "./LinkButton";
 import LinkText from "./LinkText";
 
-function Header({type = "standard", setType, dark, setDark, setTheme}){
+function Header({type = "standard", setType, dark, setDark, setTheme, onAlert}){
     
     const location = useLocation();
+    const navigate = useNavigate();
     
-    useEffect(() => {
+    const [themeButton, setThemeButton] = useState(5);
+    
+    const keyDownSelector = (event) => event.keyCode === 13 && changeTheme();
+    const keyDownLogout = (event) => event.keyCode === 13 && logout();
+    const keyDownLogin = (event) => event.keyCode === 13 && login();
+    const keyDownRegister = (event) => event.keyCode === 13 && register();
 
+    useEffect(() => {
+        
         if(location.pathname === "/"){
             setType("login");
         }else if(location.pathname === "/register"){
             setType("register")
+        }else if(location.pathname === "/home"){
+            setType("home")
+        }else if(location.pathname === "/newdivision"){
+            setType("newdivision")
         }else{
-            setType("standard")
+            setType("divisions")
         };
     }, [type, location.pathname, setType]);
     
-    const [themeButton, setThemeButton] = useState(5);
-
     function changeTheme(){
         if(!dark){
             setThemeButton(55);
@@ -36,18 +47,56 @@ function Header({type = "standard", setType, dark, setDark, setTheme}){
             setDark(!dark);
         };
     };
-
-    const keyDown = (event) => event.keyCode === 13 && changeTheme();
+    
+    function logout(){
+        api.get("/logout",).then((res) => {
+            if(res.data.type === "success"){
+                onAlert(res.data.type, res.data.value.message);
+                navigate(res.data.redirect);
+            }else{
+                onAlert(res.data.type, res.data.value.message);
+                navigate(res.data.redirect);
+            };
+        }).catch((err) => {
+            console.log(`Erro: ${err}`);
+        });
+    };
+    
+    const login = () => navigate("/");
+    const register = () => navigate("/register");
+    
 
     return(
         <header className={styles.header} >
-            <div className={styles.logo}>
-                <Logo />
-            </div>
+            { type === "login" && (
+                <div className={styles.logo}>
+                    <Logo onKeyDown={keyDownRegister} handleOnClick={register} />
+                </div>
+            )} 
+            { type === "register" && (
+                <div className={styles.logo}>
+                    <Logo onKeyDown={keyDownLogin} handleOnClick={login} />
+                </div>
+            )} 
+            { type === "home" && (
+                <div className={styles.logo}>
+                    <Logo onKeyDown={keyDownLogout} handleOnClick={logout} />
+                </div>
+            )} 
+            { type === "newdivision" && (
+                <div className={styles.logo}>
+                    <Logo onKeyDown={keyDownLogout} handleOnClick={logout} />
+                </div>
+            )} 
+            { type === "divisions" && (
+                <div className={styles.logo}>
+                    <Logo onKeyDown={keyDownLogout} handleOnClick={logout} />
+                </div>
+            )} 
             <div className={styles.action_container}>
                 <svg 
                     onClick={changeTheme} 
-                    onKeyDown={keyDown} 
+                    onKeyDown={keyDownSelector} 
                     tabIndex={0} 
                     className={styles.theme_buttom} 
                     viewBox="0 0 100 50"
@@ -60,10 +109,22 @@ function Header({type = "standard", setType, dark, setDark, setTheme}){
                 { type === "register" && (
                     <LinkButton to="/" text="Login" />
                 )} 
-                { type === "standard" && (
+                { type === "home" && (
                     <nav>
                         <LinkText to="/divisions" text="Divisões" />
                         <LinkText to="/newdivision" text="Nova divisão" />
+                    </nav>
+                )} 
+                { type === "newdivision" && (
+                    <nav>
+                        <LinkText to="/divisions" text="Divisões" />
+                        <LinkText to="/home" text="Home" />
+                    </nav>
+                )} 
+                { type === "divisions" && (
+                    <nav>
+                        <LinkText to="/newdivision" text="Nova divisão" />
+                        <LinkText to="/home" text="Home" />
                     </nav>
                 )} 
             </div>
