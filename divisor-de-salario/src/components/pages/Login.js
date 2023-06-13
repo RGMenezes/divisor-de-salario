@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../../api/db";
 
 import styles from "./Login.module.css";
@@ -8,17 +9,19 @@ import Button from "../form/Button";
 
 import LinkText from "../layout/LinkText";
 
-function Login(){
-
+function Login({onAlert}){
+    
+    const navigate = useNavigate();
     const [user, setUser] = useState({});
 
     function submit(e){
         e.preventDefault();
 
-        api.post("/login", user,).then((res) => {
-            //tratar a resposta do servidor
+        api.post("/login", user).then((res) => {
+            onAlert(res.data.type, res.data.value.message);
+            navigate(res.data.redirect);
         }).catch((err) => {
-            //fazer o alert do site  
+            console.log(`Erro: ${err}`);
         });
     };
 

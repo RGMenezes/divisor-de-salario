@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../../api/db";
 
 import styles from "./Register.module.css";
@@ -7,7 +8,9 @@ import Input from "../form/Input";
 import Button from "../form/Button";
 import LinkText from "../layout/LinkText";
 
-function Register(){
+function Register({onAlert}){
+
+    const navigate = useNavigate()
     const [user, setUser] = useState({});
 
     function submit(e){
@@ -15,35 +18,15 @@ function Register(){
 
         if(user.password === user.passwordConfirm){
             api.post("/register", {user: user}).then((res) => {
-                console.log(res.data)
-                api.post("/alert", {message: res.data}).then().catch((err) => {
-                    console.log("Erro: "+err);
-                });
+                onAlert(res.data.type, res.data.value.message);
+                navigate(res.data.redirect);
             }).catch((err) => {
-                let message = {
-                    type: "error", 
-                    value: {
-                        error: err, 
-                        message: "Não foi possível acessar o servidor para concluir o cadastro, tente novamente!"
-                    },
-                    redirect: "/"
-                };
-                api.post("/alert", {message: message}).then().catch((err) => {
-                    console.log("Erro: "+err);
-                });
+                onAlert("error", "Não foi possível acessar o servidor para concluir o cadastro, tente novamente!");
+                navigate("/");
             });
         }else{
-            let message = {
-                type: "error", 
-                value: {
-                    error: "Senhas diferentes", 
-                    message: "As senhas não são iguais, tente novamente!"
-                },
-                redirect: "/register"
-            };
-            api.post("/alert", {message: message}).then().catch((err) => {
-                console.log("Erro: "+err);
-            });
+            onAlert("error", "As senha não são iguais, tente novamente!");
+            navigate("/register");
         };
 
     };

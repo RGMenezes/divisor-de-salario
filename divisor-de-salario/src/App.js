@@ -19,15 +19,15 @@ function App() {
 
   const [alert, setAlert] = useState(false);
 
-  function reRenderAlert(){
-    setAlert(true);
-    setTimeout(() => setAlert(false), 50);
+  function alertActive(type, message){
+    setAlert({type: type, message: message});
+    setTimeout(() => setAlert(false), 10);
   };
 
   return (
     <Router>
-      <div onSubmit={reRenderAlert} className={`${styles[themeMode]}`}>
-        <Alert reRender={alert} />
+      <div className={`${styles[themeMode]}`}>
+        <Alert onActive={alert} />
 
         <Header 
           type={userRouter} 
@@ -38,8 +38,8 @@ function App() {
         />
 
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/" element={<Login onAlert={alertActive} />} />
+          <Route path="/register" element={<Register onAlert={alertActive} />} />
           <Route path="/home" element={<Home />} />
         </Routes>
         <Footer />
