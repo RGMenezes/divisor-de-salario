@@ -53,11 +53,14 @@ function Header({type = "standard", setType, dark, setDark, setTheme, onAlert}){
 
     function verifyUser(){
         api.get("/find/user").then((res) => {
-            if(res.data){
-                //console.log("Usuário logado");
+            if(res.data.type === "success"){
+
+            }else{
+                onAlert(res.data.type, res.data.value.message);
+                navigate(res.data.redirect);
             };
-            console.log(res.data);
         }).catch((err) => {
+            onAlert("error", "Não foi possível se conectar com o servidor, tente novamente!");
             navigate("/");
         });
     };
