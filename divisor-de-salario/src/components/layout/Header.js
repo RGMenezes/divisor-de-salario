@@ -26,13 +26,16 @@ function Header({type = "standard", setType, dark, setDark, setTheme, onAlert}){
         if(location.pathname === "/"){
             setType("login");
         }else if(location.pathname === "/register"){
-            setType("register")
+            setType("register");
         }else if(location.pathname === "/home"){
-            setType("home")
+            setType("home");
+            verifyUser();
         }else if(location.pathname === "/newdivision"){
-            setType("newdivision")
+            setType("newdivision");
+            verifyUser();
         }else{
-            setType("divisions")
+            setType("divisions");
+            verifyUser();
         };
     }, [type, location.pathname, setType]);
     
@@ -46,6 +49,17 @@ function Header({type = "standard", setType, dark, setDark, setTheme, onAlert}){
             setTheme("ligth");
             setDark(!dark);
         };
+    };
+
+    function verifyUser(){
+        api.get("/find/user").then((res) => {
+            if(res.data){
+                //console.log("Usuário logado");
+            };
+            console.log(res.data);
+        }).catch((err) => {
+            navigate("/");
+        });
     };
     
     function logout(){
