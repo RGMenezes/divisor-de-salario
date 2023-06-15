@@ -36,8 +36,23 @@ function Header({type = "standard", setType, dark, setDark, setTheme, onAlert}){
         }else{
             setType("divisions");
             verifyUser();
+        }
+
+        function verifyUser(){
+            api.get("/find/user").then((res) => {
+                if(res.data.type === "success"){
+                    navigate(res.data.redirect)
+                }else{
+                    onAlert(res.data.type, res.data.value.message);
+                    navigate(res.data.redirect);
+                };
+            }).catch((err) => {
+                onAlert("error", "Não foi possível se conectar com o servidor, tente novamente!");
+                navigate("/");
+            });
         };
-    }, [type, location.pathname, setType]);
+
+    }, [location.pathname, setType, navigate, onAlert]);
     
     function changeTheme(){
         if(!dark){
@@ -49,20 +64,6 @@ function Header({type = "standard", setType, dark, setDark, setTheme, onAlert}){
             setTheme("ligth");
             setDark(!dark);
         };
-    };
-
-    function verifyUser(){
-        api.get("/find/user").then((res) => {
-            if(res.data.type === "success"){
-
-            }else{
-                onAlert(res.data.type, res.data.value.message);
-                navigate(res.data.redirect);
-            };
-        }).catch((err) => {
-            onAlert("error", "Não foi possível se conectar com o servidor, tente novamente!");
-            navigate("/");
-        });
     };
     
     function logout(){

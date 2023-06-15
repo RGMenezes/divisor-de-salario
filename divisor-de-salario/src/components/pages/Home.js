@@ -24,7 +24,7 @@ function Home({onAlert}){
             onAlert("error", "Não foi possível se conectar com o servidor, tente novamente!");
             navigate("/");
         });
-    }, []);
+    }, [navigate, onAlert]);
 
     const allowDeletingUser = () => deleteUser ? setDeleteUser(null) : setDeleteUser("popup_active");
 
