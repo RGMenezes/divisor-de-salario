@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./Button.module.css";
 
-function Button({text,type , detach = false}){
+function Button({text,type , detach = false, handleOnClick}){
 
     const [onDetach, setOnDetach] = useState("")
 
@@ -10,7 +10,7 @@ function Button({text,type , detach = false}){
     }, [detach])
 
     return(
-        <button type={type} className={`${styles.button} ${styles[onDetach]}`}>{text}</button>
+        <button onClick={handleOnClick} type={type} className={`${styles.button} ${styles[onDetach]}`}>{text}</button>
     );
 };
 
