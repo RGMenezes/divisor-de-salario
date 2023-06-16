@@ -49,7 +49,7 @@ function NewDivision({onAlert}){
   const addCategory = () => {
     setCategory(category + 1);
     let copyDivision = division;
-    copyDivision.push(["Nova Divisão", 0, division.length+1]);
+    copyDivision.push(["Nova Divisão", 50, division.length+1]);
     setDivision(copyDivision);
   };
   const remCategory = () => {
@@ -61,31 +61,54 @@ function NewDivision({onAlert}){
     };
   };
 
+  function valueCategory(event, key){
+    let copyDivision = division;
+    if(event.target.type === "textarea"){
+      copyDivision[key-1][0] = event.target.value;
+    }else if(event.target.type === "range") {
+      copyDivision[key-1][1] = Number(event.target.value);
+    }else{
+      onAlert("error", "Houve um erro ao identificar o campo alterado!");
+      navigate("/home");
+    };
+    setDivision(copyDivision);
+  };
+
   return(
     <main className={styles.new_division} >
+
       <h1>Crie uma nova divisão</h1>
+
       <form onSubmit={submit} autoComplete="on">
+
         <h2>Define a quantidade de categorias</h2>
+
         <section className={styles.action_container} >
           <Button 
-            text="Diminuir"
+            text="<"
             type="button"
             handleOnClick={remCategory}
           />
           <p>{category}</p> 
           <Button 
-            text="Aumentar"
+            text=">"
             type="button"
             handleOnClick={addCategory}
           /> 
         </section>
+
         <section className={styles.category_container} >
           {division.map((element) => (
-            <div key={element[2]} className={styles.category}>
+            <div 
+              onChange={function(e){valueCategory(e, element[2])}} 
+              key={element[2]} 
+              className={styles.category
+            }>
               <Textarea 
                 cols={20}
                 rows={1}
                 text={element[0]}
+                recize={false}
               />
               <Range 
                 min={0}
@@ -94,6 +117,7 @@ function NewDivision({onAlert}){
             </div>
           ))}
         </section>
+
         <section className={styles.action_container}>
           <LinkText 
             to="/Home"
@@ -105,7 +129,9 @@ function NewDivision({onAlert}){
             detach={true}
           />
         </section>
+
       </form>
+
     </main>
   );
 };
