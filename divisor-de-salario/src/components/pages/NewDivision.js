@@ -6,8 +6,8 @@ import styles from "./NewDivision.module.css";
 
 import Button from "../form/Button";
 import LinkText from "../layout/LinkText";
-import Input from "../form/Input";
 import Range from "../form/Range";
+import Textarea from "../form/Textarea";
 
 function NewDivision({onAlert}){
 
@@ -15,8 +15,8 @@ function NewDivision({onAlert}){
     
   const [user, setUser] = useState({});
   const [division, setDivision] = useState([
-    ["Divisão 1", 50],
-    ["Divisão 2", 50]
+    ["Divisão 1", 50, 1],
+    ["Divisão 2", 50, 2]
   ]);
   const [category, setCategory] = useState(2);
 
@@ -34,28 +34,32 @@ function NewDivision({onAlert}){
     });
   }, [navigate, onAlert]);
 
-  useEffect(() => {
-    if(category < division.length){
-      division.pop();
-    }else{
-      division.push(["Nova Divisão", 0]);
-    };
-  }, [category, division]);
+  // function addNewDivision(){
+  //   api.put("/new/division", ).then((res) => {
 
-  function addNewDivision(){
-    api.put("/new/division", ).then((res) => {
-
-    }).catch((err) => {
-      console.log(`Erro: ${err}`);
-    });
-  };
+  //   }).catch((err) => {
+  //     console.log(`Erro: ${err}`);
+  //   });
+  // };
 
   function submit(e){
     e.preventDefault();
   };
 
-  const addCategory = () => setCategory(category + 1);
-  const remCategory = () => {if(category > 2){setCategory(category - 1)}};
+  const addCategory = () => {
+    setCategory(category + 1);
+    let copyDivision = division;
+    copyDivision.push(["Nova Divisão", 0, division.length+1]);
+    setDivision(copyDivision);
+  };
+  const remCategory = () => {
+    if(category > 2){
+      setCategory(category - 1)
+      let copyDivision = division;
+      copyDivision.pop();
+      setDivision(copyDivision);
+    };
+  };
 
   return(
     <main className={styles.new_division} >
@@ -77,21 +81,17 @@ function NewDivision({onAlert}){
         </section>
         <section className={styles.category_container} >
           {division.map((element) => (
-            <div key={element[0]} className={styles.category}>
-            <Input 
-              id={element[0]}
-              type="text"
-              placeholder="Nome da categoria"
-              required={true}
-              minLength={2}
-              handleOnChange={(e) => division[element][0] = e.target.value}
-            />
-            <Range 
-              min={0}
-              max={100}
-              handleOnChange={(e) => division[element][1] = e.target.value}
-            />
-          </div>
+            <div key={element[2]} className={styles.category}>
+              <Textarea 
+                cols={20}
+                rows={1}
+                text={element[0]}
+              />
+              <Range 
+                min={0}
+                max={100}
+              />
+            </div>
           ))}
         </section>
         <section className={styles.action_container}>
