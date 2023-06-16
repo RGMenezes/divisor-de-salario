@@ -23,11 +23,18 @@
     color: var(--color-1);
     text-align: center;
 }
+.new_division h3{
+    width: 100%;
+
+    font: normal 600 1.1em var(--font);
+    color: var(--color-1);
+    text-align: left;
+}
 
 .new_division form{
     width: 300px;
 
-    padding: 40px 15px;
+    padding: 50px 40px;
 
     display: flex;
     flex-flow: column nowrap;
@@ -38,6 +45,10 @@
     background-color: var(--color-bg-2);
     border: 1px solid var(--color-1);
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.new_division .split_amount{
+    width: 100%;
 }
 
 .new_division .action_container{

@@ -8,6 +8,7 @@ import Button from "../form/Button";
 import LinkText from "../layout/LinkText";
 import Range from "../form/Range";
 import Textarea from "../form/Textarea";
+import Input from "../form/Input";
 
 function NewDivision({onAlert}){
 
@@ -47,10 +48,14 @@ function NewDivision({onAlert}){
   };
 
   const addCategory = () => {
-    setCategory(category + 1);
-    let copyDivision = division;
-    copyDivision.push(["Nova Divisão", 50, division.length+1]);
-    setDivision(copyDivision);
+    if(category < 10){
+      setCategory(category + 1);
+      let copyDivision = division;
+      copyDivision.push(["Nova Divisão", 50, division.length+1]);
+      setDivision(copyDivision);
+    }else{
+      onAlert("", "Número máximo de categorias atingido!");
+    };
   };
   const remCategory = () => {
     if(category > 2){
@@ -58,6 +63,8 @@ function NewDivision({onAlert}){
       let copyDivision = division;
       copyDivision.pop();
       setDivision(copyDivision);
+    }else{
+      onAlert("", "Número mínimo de categorias atingido!");
     };
   };
 
@@ -74,6 +81,8 @@ function NewDivision({onAlert}){
     setDivision(copyDivision);
   };
 
+  const splitAmount = (e) => e.target.value;
+
   return(
     <main className={styles.new_division} >
 
@@ -81,7 +90,21 @@ function NewDivision({onAlert}){
 
       <form onSubmit={submit} autoComplete="on">
 
-        <h2>Define a quantidade de categorias</h2>
+        <h2>Defina a sua divisão</h2>
+
+        <div className={styles.split_amount}>
+          <Input
+            text="Valor"
+            id="splitAmount"
+            type="Number"
+            min={0}
+            placeholder="Valor a ser dividido"
+            required={true}
+            handleOnChange={splitAmount}
+          />
+        </div>
+
+        <h3>Categorias:</h3> 
 
         <section className={styles.action_container} >
           <Button 
@@ -131,6 +154,10 @@ function NewDivision({onAlert}){
         </section>
 
       </form>
+
+      <div className={styles.graphic} >
+
+      </div>
 
     </main>
   );
