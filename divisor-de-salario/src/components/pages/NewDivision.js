@@ -157,13 +157,6 @@ function NewDivision({onAlert}){
 
       </form>
 
-      <div className={styles.graphic}>
-        <Graphic
-          division={division}
-          amount={amount}
-        />
-      </div>
-
     </main>
   );
 };
