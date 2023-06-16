@@ -1,0 +1,7 @@
+.graphic{
+    width: 100%;
+}
+
+.graphic circle{
+    fill: transparent;
+}

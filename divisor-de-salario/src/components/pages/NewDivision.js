@@ -9,6 +9,7 @@ import LinkText from "../layout/LinkText";
 import Range from "../form/Range";
 import Textarea from "../form/Textarea";
 import Input from "../form/Input";
+import Graphic from "../layout/Graphic";
 
 function NewDivision({onAlert}){
 
@@ -19,6 +20,7 @@ function NewDivision({onAlert}){
     ["Divisão 1", 50, 1],
     ["Divisão 2", 50, 2]
   ]);
+  const [amount, setAmount] = useState(0);
   const [category, setCategory] = useState(2);
 
   useEffect(() => {
@@ -81,7 +83,7 @@ function NewDivision({onAlert}){
     setDivision(copyDivision);
   };
 
-  const splitAmount = (e) => e.target.value;
+  const valueAmount = (e) => setAmount(Number(e.target.value));
 
   return(
     <main className={styles.new_division} >
@@ -95,12 +97,12 @@ function NewDivision({onAlert}){
         <div className={styles.split_amount}>
           <Input
             text="Valor"
-            id="splitAmount"
+            id="amount"
             type="Number"
             min={0}
             placeholder="Valor a ser dividido"
             required={true}
-            handleOnChange={splitAmount}
+            handleOnChange={valueAmount}
           />
         </div>
 
@@ -155,8 +157,11 @@ function NewDivision({onAlert}){
 
       </form>
 
-      <div className={styles.graphic} >
-
+      <div className={styles.graphic}>
+        <Graphic
+          division={division}
+          amount={amount}
+        />
       </div>
 
     </main>
