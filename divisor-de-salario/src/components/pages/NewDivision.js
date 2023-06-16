@@ -17,6 +17,7 @@ function NewDivision({onAlert}){
     ["Divisão 2", 50, 2]
   ]);
   const [amount, setAmount] = useState(0);
+  const [name, setName] = useState(0);
   const [category, setCategory] = useState(2);
 
   useEffect(() => {
@@ -35,7 +36,7 @@ function NewDivision({onAlert}){
   function addNewDivision(e){
     e.preventDefault();
 
-    api.put("/new/division", {division: division, amount: amount}).then((res) => {
+    api.put("/new/division", {name: name, division: division, amount: amount}).then((res) => {
       onAlert(res.data.type, res.data.value.message);
       navigate(res.data.redirect);
     }).catch((err) => {
@@ -78,6 +79,7 @@ function NewDivision({onAlert}){
   };
 
   const valueAmount = (e) => setAmount(Number(e.target.value));
+  const valueName = (e) => setName(e.target.value);
 
   return(
     <main className={styles.new_division} >
@@ -87,18 +89,26 @@ function NewDivision({onAlert}){
       <form onSubmit={addNewDivision} autoComplete="on">
 
         <h2>Defina a sua divisão</h2>
+        
+        <Input
+          text="Nome"
+          id="name"
+          type="text"
+          minLength={2}
+          placeholder="Nome da divisão"
+          required={true}
+          handleOnChange={valueName}
+        />
 
-        <div className={styles.split_amount}>
-          <Input
-            text="Valor"
-            id="amount"
-            type="Number"
-            min={0}
-            placeholder="Valor a ser dividido"
-            required={true}
-            handleOnChange={valueAmount}
-          />
-        </div>
+        <Input
+          text="Valor"
+          id="amount"
+          type="Number"
+          min={0}
+          placeholder="Valor a ser dividido"
+          required={true}
+          handleOnChange={valueAmount}
+        />
 
         <h3>Categorias:</h3> 
 
