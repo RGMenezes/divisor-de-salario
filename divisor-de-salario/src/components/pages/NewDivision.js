@@ -9,13 +9,9 @@ import LinkText from "../layout/LinkText";
 import Range from "../form/Range";
 import Textarea from "../form/Textarea";
 import Input from "../form/Input";
-import Graphic from "../layout/Graphic";
 
 function NewDivision({onAlert}){
-
   const navigate = useNavigate();
-    
-  const [user, setUser] = useState({});
   const [division, setDivision] = useState([
     ["Divisão 1", 50, 1],
     ["Divisão 2", 50, 2]
@@ -26,7 +22,6 @@ function NewDivision({onAlert}){
   useEffect(() => {
     api.get("/find/user").then((res) => {
       if(res.data.type === "success"){
-          setUser(res.data.value);
       }else{
           onAlert(res.data.type, res.data.value.message);
           navigate(res.data.redirect);
@@ -37,16 +32,15 @@ function NewDivision({onAlert}){
     });
   }, [navigate, onAlert]);
 
-  // function addNewDivision(){
-  //   api.put("/new/division", ).then((res) => {
-
-  //   }).catch((err) => {
-  //     console.log(`Erro: ${err}`);
-  //   });
-  // };
-
-  function submit(e){
+  function addNewDivision(e){
     e.preventDefault();
+
+    api.put("/new/division", {division: division, amount: amount}).then((res) => {
+      onAlert(res.data.type, res.data.value.message);
+      navigate(res.data.redirect);
+    }).catch((err) => {
+      console.log(`Erro: ${err}`);
+    });
   };
 
   const addCategory = () => {
@@ -90,7 +84,7 @@ function NewDivision({onAlert}){
 
       <h1>Crie uma nova divisão</h1>
 
-      <form onSubmit={submit} autoComplete="on">
+      <form onSubmit={addNewDivision} autoComplete="on">
 
         <h2>Defina a sua divisão</h2>
 
