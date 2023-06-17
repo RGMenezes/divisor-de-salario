@@ -95,6 +95,7 @@ function NewDivision({onAlert}){
           id="name"
           type="text"
           minLength={2}
+          maxLength={15}
           placeholder="Nome da divisão"
           required={true}
           handleOnChange={valueName}
@@ -138,6 +139,7 @@ function NewDivision({onAlert}){
                 rows={1}
                 text={element[0]}
                 recize={false}
+                maxLength={12}
               />
               <Range 
                 min={0}

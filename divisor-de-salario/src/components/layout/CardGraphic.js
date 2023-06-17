@@ -11,16 +11,16 @@ function CardGraphic({name, division, amount, onAlert}){
     const navigate = useNavigate();
 
     const color = [
-        "#FF6384",
-        "#36A2EB", 
-        "#FFCE56", 
-        "#4BC0C0", 
-        "#9966FF", 
-        "#FF9F40", 
-        "#00B8A9",
-        "#F6416C",
-        "#9EEBCF",
-        "#FFD700"
+        "#FF4500",
+        "#FF6F00",
+        "#FF8C00",
+        "#FFA726",
+        "#FFC107",
+        "#1976D2",
+        "#2196F3",
+        "#42A5F5",
+        "#64B5F6",
+        "#90CAF9"
     ];
 
     const divisionReduce = division.reduce((acc, cur) => acc + cur[1], 0)
@@ -35,7 +35,8 @@ function CardGraphic({name, division, amount, onAlert}){
 
     function deleteDivision(){
         api.put("/delete/division", {name: name, division: division, amount: amount}).then((res) => {
-            
+            onAlert(res.data.type, res.data.value.message);
+            navigate("/home");
         }).catch((err) => {
             onAlert("error", "Não foi possível deletar esta divisão, tente novamente!");
         });
