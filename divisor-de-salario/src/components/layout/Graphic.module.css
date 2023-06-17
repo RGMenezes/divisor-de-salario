@@ -5,3 +5,8 @@
 .graphic circle{
     fill: transparent;
 }
+
+.graphic .inner_edge{
+    stroke: var(--color-1);
+    stroke-width: 1px;
+}

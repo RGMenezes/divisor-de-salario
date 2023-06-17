@@ -1,31 +1,17 @@
 import { useEffect, useState } from "react";
 import styles from "./Graphic.module.css";
 
-function Graphic({division}){
+function Graphic({division, color}){
     const [circle, setCircle] = useState([]);
     
     useEffect(() => {
         const porcentage = (total, value) => (value * 100) / total;
         const strokePorcentage = (value) => (value * 220) / 100;
         let newCircle = [];
-        const color = [
-            "#FF6384",
-            "#36A2EB", 
-            "#FFCE56", 
-            "#4BC0C0", 
-            "#9966FF", 
-            "#FF9F40", 
-            "#00B8A9",
-            "#F6416C",
-            "#9EEBCF",
-            "#FFD700"
-        ];
-
         let currStroke = 220;
 
         for(let element of division){
-            let valueCategory = division.reduce((acc, curr) => acc + curr[1], 0);
-            currStroke -= strokePorcentage(porcentage(valueCategory, valueCategory - element[1]));
+            currStroke -= strokePorcentage(porcentage(100, element[1]));
             newCircle.push([
                 currStroke,
                 color[division.indexOf(element)]
@@ -33,7 +19,7 @@ function Graphic({division}){
         };
 
         setCircle(newCircle.reverse());
-    },[division]);
+    },[division, color]);
     
 
     return(
@@ -45,6 +31,8 @@ function Graphic({division}){
                 <circle cx="50" cy="50" r="35" stroke={element[1]} strokeWidth={15} 
                 key={element[1]} strokeDasharray={220} strokeDashoffset={element[0]}/>
             ))}
+            <circle cx="50" cy="50" r="27" className={styles.inner_edge} />
+            <circle cx="50" cy="50" r="43" className={styles.inner_edge} />
         </svg>
     );
 };

@@ -5,6 +5,7 @@ import api from "../../api/db";
 import styles from "./Home.module.css";
 
 import Button from "../form/Button";
+import CardGraphic from "../layout/CardGraphic";
 
 function Home({onAlert}){
     const navigate = useNavigate();
@@ -49,9 +50,28 @@ function Home({onAlert}){
                 />
             </section>
 
-            <section className={styles.divisions}>
-
-            </section>
+            {user.division && (
+                <>
+                    {user.division[0] && (
+                        <section className={styles.divisions}>
+                            <CardGraphic
+                                name={user.division[user.division.length-1].name}
+                                amount={user.division[user.division.length-1].amount}
+                                division={user.division[user.division.length-1].division}
+                                onAlert={onAlert}
+                            />
+                            {user.division[1] && (
+                                <CardGraphic
+                                    name={user.division[user.division.length-2].name}
+                                    amount={user.division[user.division.length-2].amount}
+                                    division={user.division[user.division.length-2].division}
+                                    onAlert={onAlert}
+                                />
+                            )}
+                        </section>
+                    )}
+                </>
+            )}
 
             <div className={`${styles.popup} ${styles[deleteUser]}`}>
                 <p>Deseja realmente deletar este usuário?</p>
