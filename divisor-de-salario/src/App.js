@@ -45,7 +45,7 @@ function App() {
           <Route path="/register" element={<Register onAlert={alertActive} />} />
           <Route path="/home" element={<Home onAlert={alertActive} />} />
           <Route path="/newdivision" element={<NewDivision onAlert={alertActive} />} />
-          <Route path="/divisions" element={<Divisions />} />
+          <Route path="/divisions" element={<Divisions onAlert={alertActive} />} />
         </Routes>
         <Footer />
       </div>

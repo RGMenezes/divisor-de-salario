@@ -36,7 +36,7 @@ function CardGraphic({name, division, amount, onAlert}){
     function deleteDivision(){
         api.put("/delete/division", {name: name, division: division, amount: amount}).then((res) => {
             onAlert(res.data.type, res.data.value.message);
-            navigate("/home");
+            navigate(res.data.redirect);
         }).catch((err) => {
             onAlert("error", "Não foi possível deletar esta divisão, tente novamente!");
         });
