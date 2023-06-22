@@ -27,7 +27,9 @@ O Divisor de Salário é uma aplicação web que permite aos usuários dividir s
 
 ### Contribuição
 
-Se você deseja contribuir para o desenvolvimento do Divisor de Salário, sinta-se à vontade para enviar pull requests ou relatar problemas nas [issues](https://github.com/RGMenezes/divisor-de-salario/issues). Toda contribuição é bem-vinda!
+Se você deseja contribuir para o desenvolvimento do Divisor de Salário, sinta-se à vontade para enviar pull requests ou relatar problemas nas [issues](https://github.com/RGMenezes/db-divisor-de-salario/issues). Toda contribuição é bem-vinda!
 
 ### Contato
-Em caso de dúvidas ou sugestões, entre em contato conosco pelo email [email protected] ou visite nosso site divisor-salario.com.
+Em caso de dúvidas ou sugestões, entre em contato comigo pelo email [faelgmp@gmail.com].
+
+##### Visite o site [divisordesalario.netlify.app].
